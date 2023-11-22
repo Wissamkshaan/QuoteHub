@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import Home from './Home';
+import AddQuote from './AddQuote';
 
-function App() {
+const App = () => {
+  const [quotes, setQuotes] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const handleAddQuote = (newQuote) => {
+    setQuotes([...quotes, newQuote]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/add">Add Quote</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <hr />
+
+        <Routes>
+          <Route path="/" element={<Home quotes={quotes} />} />
+          {/* Pass quotes and handleAddQuote to AddQuote */}
+          <Route path="/add" element={<AddQuote onAdd={handleAddQuote} categories={categories} />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
