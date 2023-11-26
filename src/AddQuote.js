@@ -1,57 +1,41 @@
-// src/AddQuote.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Form, TextArea, Input, Button, Header } from 'semantic-ui-react';
 
-
-const AddQuote = ({ onAdd, categories }) => {
+const AddQuote = ({ onAdd }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  
- 
-  
+
   const handleAdd = () => {
-    if (quote && author && selectedCategory) {
+    if (quote && author) {
       const newQuote = {
         content: quote,
         author: author,
-        tags: [selectedCategory], // Ensure that the category is an array
       };
       onAdd(newQuote);
       setQuote('');
       setAuthor('');
-      setSelectedCategory('');
     } else {
-      alert('Please fill in all fields');
+      alert('Please fill in both the quote and author fields.');
     }
   };
 
   return (
-    <div>
+    <div style={{marginTop: '30px', color:'blue'}} >
       <h2>Add a New Quote</h2>
-      <form>
-        <div>
+  
+      <Form>
+        <Form.Field>
           <label>Quote:</label>
-          <textarea value={quote} onChange={(e) => setQuote(e.target.value)} />
-        </div>
-        <div>
+          <TextArea value={quote} onChange={(e) => setQuote(e.target.value)} />
+        </Form.Field>
+        <Form.Field>
           <label>Author:</label>
-          <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </div>
-        <div>
-          <label>Category:</label>
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button type="button" onClick={handleAdd}>
+          <Input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+        </Form.Field>
+        <Button type="button" onClick={handleAdd} color='green'>
           Add Quote
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 };
