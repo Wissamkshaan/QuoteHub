@@ -1,42 +1,42 @@
 import React, { useState } from 'react';
-import { Form, TextArea, Input, Button, Header } from 'semantic-ui-react';
 
-const AddQuote = ({ onAdd }) => {
+const AddQuote = ({ categories, onAdd }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
+  const [category, setCategory] = useState(''); // Default category
 
-  const handleAdd = () => {
-    if (quote && author) {
-      const newQuote = {
-        content: quote,
-        author: author,
-      };
-      onAdd(newQuote);
-      setQuote('');
-      setAuthor('');
-    } else {
-      alert('Please fill in both the quote and author fields.');
-    }
+  const handleAddQuote = (e) => {
+    e.preventDefault();
+    onAdd({ quote, author, category });
+    setQuote('');
+    setAuthor('');
+    setCategory('');
   };
 
   return (
-    <div style={{marginTop: '30px', color:'blue'}} >
-      <h2>Add a New Quote</h2>
-  
-      <Form>
-        <Form.Field>
-          <label>Quote:</label>
-          <TextArea value={quote} onChange={(e) => setQuote(e.target.value)} />
-        </Form.Field>
-        <Form.Field>
-          <label>Author:</label>
-          <Input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </Form.Field>
-        <Button type="button" onClick={handleAdd} color='green'>
-          Add Quote
-        </Button>
-      </Form>
-    </div>
+    <form onSubmit={handleAddQuote}>
+      <label>
+        Quote:
+        <input type="text" value={quote} onChange={(e) => setQuote(e.target.value)} />
+      </label>
+      <label>
+        Author:
+        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+      </label>
+      <label>
+        Category:
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+  <option value="">Select a category</option>
+  {categories.map((category, index) => (
+    <option key={index} value={category}>
+      {category}
+    </option>
+  ))}
+</select>
+
+      </label>
+      <button type="submit" onClick={handleAddQuote}>Add Quote</button>
+    </form>
   );
 };
 

@@ -1,32 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Dropdown, Label } from 'semantic-ui-react';
 
-const CategoryFilter = ({ onSelectCategory }) => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    // Fetch categories from the Quotable API
-    fetch('https://api.quotable.io/tags')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (Array.isArray(data)) {
-          // Extract category names from the objects
-          const categoryNames = data.map((category) => category.name);
-          setCategories(categoryNames);
-        } else {
-          console.error('Invalid data format for categories:', data);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching categories:', error);
-      });
-  }, []);
-
+const CategoryFilter = ({ categories, onSelectCategory }) => {
   const handleSelectCategory = (value) => {
     // Ensure that "All" option resets the filter
     const category = value === 'All' ? '' : value;
@@ -39,9 +14,9 @@ const CategoryFilter = ({ onSelectCategory }) => {
       <Dropdown
         onChange={(e, { value }) => handleSelectCategory(value)}
         options={[
-          { key: 'all', text: 'All', value: 'All' }, // Add an "All" option to render all quotes 
-          ...categories.map((category) => ({
-            key: category,
+          { key: 'all', text: 'All', value: 'All' },
+          ...categories.map((category, index) => ({
+            key: index, // Use the index as a fallback key
             text: category,
             value: category,
           })),
@@ -52,5 +27,6 @@ const CategoryFilter = ({ onSelectCategory }) => {
     </div>
   );
 };
+
 
 export default CategoryFilter;
