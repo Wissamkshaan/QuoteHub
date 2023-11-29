@@ -6,7 +6,7 @@ import Logo from './logo.png';
 
 function App() {
   const [quotes, setQuotes] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     // Load quotes from localStorage on component mount
@@ -19,7 +19,7 @@ function App() {
       .then((data) => {
         if (Array.isArray(data)) {
           const categoryNames = data.map((category) => category.name);
-          setCategories(categoryNames);
+          setTags(categoryNames);
         } else {
           console.error('Invalid data format for categories:', data);
         }
@@ -31,10 +31,11 @@ function App() {
 
   const handleAddQuote = (newQuote) => {
     // Update the state with the new quote
-    setQuotes((prevQuotes) => [...prevQuotes, newQuote]);
+    const updatedQuote = [...quotes, newQuote];
+    setQuotes(updatedQuote);
 
     // Save the updated quotes to localStorage
-    localStorage.setItem('quotes', JSON.stringify([...quotes, newQuote]));
+    localStorage.setItem('quotes', JSON.stringify(updatedQuote));
   };
 
   return (
@@ -53,7 +54,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home quotes={quotes} categories={categories} />}
+            element={<Home quotes={quotes} tags={tags} />}
           />
         </Routes>
       </Container>

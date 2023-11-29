@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, Label } from 'semantic-ui-react';
 
-const CategoryFilter = ({ categories, onSelectCategory }) => {
+const CategoryFilter = ({ tags, onSelectCategory }) => {
   const handleSelectCategory = (value) => {
     // Ensure that "All" option resets the filter
     const category = value === 'All' ? '' : value;
@@ -15,10 +15,10 @@ const CategoryFilter = ({ categories, onSelectCategory }) => {
         onChange={(e, { value }) => handleSelectCategory(value)}
         options={[
           { key: 'all', text: 'All', value: 'All' },
-          ...categories.map((category, index) => ({
+          ...tags.map((tag, index) => ({
             key: index, // Use the index as a fallback key
-            text: category,
-            value: category,
+            text: tag,
+            value: tag,
           })),
         ]}
         selection
