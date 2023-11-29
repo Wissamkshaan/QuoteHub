@@ -1,0 +1,15 @@
+
+
+.content-container {
+    background-image: url('/background.webp');
+    background-size:cover;
+    background-position: center top;
+    min-height:100vh; 
+    position: relative;
+    align-items: center;
+    justify-content: center;
+ 
+
+
+  }
+ 

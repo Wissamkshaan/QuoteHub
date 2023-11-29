@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { Container, Header, Menu } from 'semantic-ui-react';
 import Home from './Home';
 import Logo from './logo.png';
+import FullBackground from './BackgroundImage';
+
 
 function App() {
   const [quotes, setQuotes] = useState([]);
@@ -40,9 +42,10 @@ function App() {
 
   return (
     <Router>
+    <FullBackground>
       <Container textAlign='center'>
         
-        <Header as='h1'>QuoteHub</Header>
+        <Header as='h1'color='blue' style={{ fontStyle: 'italic' ,fontSize: '50px' }}>QuoteHub</Header>
         <Menu>
           <Menu.Item as={Link} to="/">
           <img src={Logo} alt="Logo" style={{ height: '40px', marginRight: '10px', }} />
@@ -58,6 +61,7 @@ function App() {
           />
         </Routes>
       </Container>
+      </FullBackground>
     </Router>
   );
 }

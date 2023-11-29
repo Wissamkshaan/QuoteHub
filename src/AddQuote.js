@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const AddQuote = ({ tagsList, onAdd }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
@@ -15,29 +16,29 @@ const AddQuote = ({ tagsList, onAdd }) => {
 
   return (
     <form onSubmit={handleAddQuote}>
-      <label>
+      <label style={{ color: 'green', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial'}}>
         Quote:
         <input type="text" value={quote} onChange={(e) => setQuote(e.target.value)} />
       </label>
-      <label>
+      <label style={{ color: 'green', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial' }}>
         Author:
         <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
       </label>
-      <label>
+      <label style={{ color: 'green', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial' }}>
         Category:
         <select value={selectedTags} onChange={(e) => setSelectedTags(e.target.value)}>
-  <option value="">Select a category</option>
-  {tagsList.map((tag, index) => (
-    <option key={index} value={tag}>
-      {tag}
-    </option>
-  ))}
-</select>
-
+          <option value="">Select a category</option>
+          {tagsList.map((tag, index) => (
+            <option key={index} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
       </label>
-      <button type="submit" onClick={handleAddQuote}>Add Quote</button>
+      <button type="submit" style={{ backgroundColor: 'green', color: 'black'}}>Add Quote</button>
     </form>
   );
 };
+
 
 export default AddQuote;
