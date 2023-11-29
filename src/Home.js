@@ -3,7 +3,7 @@ import { Container, Header, List } from 'semantic-ui-react';
 import CategoryFilter from './CategoryFilter';
 import AddQuote from './AddQuote';
 
-function Home({ categories }) {
+function Home({ tags }) {
   const [quotes, setQuotes] = useState([]);
   const [filteredQuotes, setFilteredQuotes] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -34,17 +34,32 @@ function Home({ categories }) {
   useEffect(() => {
     // Filter quotes based on selected category
     if (selectedCategory) {
-      setFilteredQuotes(quotes.filter((quote) => quote.category === selectedCategory));
+      setFilteredQuotes(quotes.filter((quote) => quote.tags.includes(selectedCategory)));
     } else {
       setFilteredQuotes(quotes);
     }
   }, [selectedCategory, quotes]);
 
-  const handleSelectCategory = (category) => {
-    setSelectedCategory(category);
+  const handleSelectCategory = (tag) => {
+  setSelectedCategory(tag);
+  let allQuotes = [];
+  const storageQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
+  
+
+  // allQuotes = [...filteredAPI, ...filterLocalStorage];
+
+  if(!tag || tag === 'All'){
+    setFilteredQuotes([...quotes, ...storageQuotes])
+  }else {
+    const filteredAPI = quotes.filter((quote)=> quote.tags.includes(tag));
+    const filterLocalStorage = storageQuotes.filter((quote)=> quote.tags.includes(tag));
+    setFilteredQuotes([...filteredAPI, ...filterLocalStorage])
+
+  }
   };
 
   const handleAddQuote = (newQuote) => {
+    console.log(newQuote);
     // Ensure that tags property is an array
     newQuote.tags = newQuote.tags || [];
   
@@ -63,7 +78,7 @@ function Home({ categories }) {
     }
   };
   
-  // Add the following useEffect to log the states after they are updated
+  // useEffect to log the states after they are updated
   useEffect(() => {
     console.log('Updated Quotes State:', quotes);
   }, [quotes]);
@@ -76,12 +91,12 @@ function Home({ categories }) {
   return (
     <Container>
       <CategoryFilter
-        categories={categories}
+        tags={tags}
         onSelectCategory={handleSelectCategory}
       />
 
       <AddQuote
-        categories={categories}
+        tagsList={tags}
         onAdd={handleAddQuote}
       />
 
@@ -90,7 +105,7 @@ function Home({ categories }) {
         {filteredQuotes.map((quote) => (
           <List.Item key={quote._id}>
             <blockquote className="ui segment">
-              <p>{quote.content}</p>
+              <p>{quote.content ? quote.content: quote.quote}</p>
               <footer>- {quote.author}</footer>
             </blockquote>
           </List.Item>

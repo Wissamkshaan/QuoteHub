@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-const AddQuote = ({ categories, onAdd }) => {
+const AddQuote = ({ tagsList, onAdd }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  const [category, setCategory] = useState(''); // Default category
+  const [selectedTags, setSelectedTags] = useState(''); // Default category
 
   const handleAddQuote = (e) => {
     e.preventDefault();
-    onAdd({ quote, author, category });
+    onAdd({ quote, author, tags: selectedTags });
     setQuote('');
     setAuthor('');
-    setCategory('');
+    setSelectedTags('');
   };
 
   return (
@@ -25,11 +25,11 @@ const AddQuote = ({ categories, onAdd }) => {
       </label>
       <label>
         Category:
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select value={selectedTags} onChange={(e) => setSelectedTags(e.target.value)}>
   <option value="">Select a category</option>
-  {categories.map((category, index) => (
-    <option key={index} value={category}>
-      {category}
+  {tagsList.map((tag, index) => (
+    <option key={index} value={tag}>
+      {tag}
     </option>
   ))}
 </select>
