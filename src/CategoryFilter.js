@@ -10,7 +10,7 @@ const CategoryFilter = ({ tags, onSelectCategory }) => {
 
   return (
     <div>
-      <Label>Filter by Category:</Label>
+      <Label color='blue'>Filter by Category:</Label>
       <Dropdown
         onChange={(e, { value }) => handleSelectCategory(value)}
         options={[

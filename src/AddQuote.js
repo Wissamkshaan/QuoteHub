@@ -16,15 +16,15 @@ const AddQuote = ({ tagsList, onAdd }) => {
 
   return (
     <form onSubmit={handleAddQuote}>
-      <label style={{ color: 'green', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial'}}>
+      <label style={{ color: '#61A3BA', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial'}}>
         Quote:
-        <input type="text" value={quote} onChange={(e) => setQuote(e.target.value)} />
+        <input type="text" value={quote} onChange={(e) => setQuote(e.target.value) } placeholder="Add your quote"/>
       </label>
-      <label style={{ color: 'green', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial' }}>
+      <label style={{ color: '#61A3BA', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial' }}>
         Author:
-        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Add your name"/>
       </label>
-      <label style={{ color: 'green', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial' }}>
+      <label style={{ color: '#61A3BA', marginRight: '10px', fontSize: '18px', fontFamily: 'Arial' }}>
         Category:
         <select value={selectedTags} onChange={(e) => setSelectedTags(e.target.value)}>
           <option value="">Select a category</option>
@@ -35,7 +35,7 @@ const AddQuote = ({ tagsList, onAdd }) => {
           ))}
         </select>
       </label>
-      <button type="submit" style={{ backgroundColor: 'green', color: 'black'}}>Add Quote</button>
+      <button type="submit" style={{ backgroundColor: '#61A3BA', color: 'black'}}>Add Quote</button>
     </form>
   );
 };

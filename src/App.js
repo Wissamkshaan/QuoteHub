@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { Container, Header, Menu } from 'semantic-ui-react';
 import Home from './Home';
-import Logo from './logo.png';
+import Logo from './logo2.jpeg';
 import FullBackground from './BackgroundImage';
 
 
@@ -45,12 +45,24 @@ function App() {
     <FullBackground>
       <Container textAlign='center'>
         
-        <Header as='h1'color='blue' style={{ fontStyle: 'italic' ,fontSize: '50px' }}>QuoteHub</Header>
+        <Header as='h1'color='blue' style={{ fontStyle: 'italic' ,fontSize: '50px' }}>❝ QuoteHub❞</Header>
         <Menu>
-          <Menu.Item as={Link} to="/">
-          <img src={Logo} alt="Logo" style={{ height: '40px', marginRight: '10px', }} />
+          <Menu.Item as={Link} to="/" style={{ width: '100px' }}>
+          <img src={Logo} alt="Logo" style={{ height: '40px', marginRight: '80px', }} />
           </Menu.Item>
-          <span style={{ margin: '10px' }}>Read to change your state of mind. Write to share your thoughts</span>
+          <span style={{ 
+            margin: '10px',
+            fontSize: '20px', 
+            fontStyle: 'oblique',
+            background: 'url("/span.jpg")', 
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            display: 'inline-block',
+            padding: '30px', 
+            color: 'black', 
+            width: '100%',
+            textShadow: '40px 15px 2px rgba(0, 0, 0, 0.5)'
+             }}>Read to enhance your state of mind. Write to share your thoughts</span>
         </Menu>
         <hr />
 
