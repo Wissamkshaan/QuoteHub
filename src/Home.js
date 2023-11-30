@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Header, List } from 'semantic-ui-react';
 import CategoryFilter from './CategoryFilter';
 import AddQuote from './AddQuote';
+import { motion } from 'framer-motion';
 
 function Home({ tags }) {
   const [quotes, setQuotes] = useState([]);
@@ -102,17 +103,33 @@ function Home({ tags }) {
 
       <Header as="h2" color='blue'>All Quotes</Header>
       <List>
-        {filteredQuotes.map((quote) => (
-          <List.Item key={quote._id}>
+      {filteredQuotes.map((quote, index) => (
+        <motion.div
+          key={quote._id}
+          whileTap={{scale: 1.40}}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }} // Adjust delay based on your preference
+        >
+          <List.Item>
             <blockquote className="ui segment">
-              <p>{quote.content ? quote.content: quote.quote}</p>
+              <p>{quote.content ? quote.content : quote.quote}</p>
               <footer>- {quote.author}</footer>
             </blockquote>
           </List.Item>
-        ))}
-      </List>
+        </motion.div>
+      ))}
+    </List>
+    <motion.p
+        style={{ textAlign: 'center', marginTop: '20px', color: 'gray', fontSize: '14px' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        © 2023 Wissam Alfuraiji. All rights reserved.
+      </motion.p>
     </Container>
   );
-}
+};
 
 export default Home;
